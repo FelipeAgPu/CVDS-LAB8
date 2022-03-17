@@ -20,7 +20,14 @@ package edu.eci.cvds.samples.services.client;
 
 import java.io.IOException;
 import java.io.InputStream;
+import java.sql.Date;
 import java.sql.SQLException;
+
+import edu.eci.cvds.sampleprj.dao.mybatis.mappers.ClienteMapper;
+import edu.eci.cvds.sampleprj.dao.mybatis.mappers.ItemMapper;
+import edu.eci.cvds.sampleprj.dao.mybatis.mappers.ItemRentadoMapper;
+import edu.eci.cvds.samples.entities.Item;
+import edu.eci.cvds.samples.entities.TipoItem;
 import org.apache.ibatis.io.Resources;
 import org.apache.ibatis.session.SqlSession;
 import org.apache.ibatis.session.SqlSessionFactory;
@@ -64,11 +71,25 @@ public class MyBatisExample {
 
         
         //Crear el mapper y usarlo: 
-        //ClienteMapper cm=sqlss.getMapper(ClienteMapper.class)
-        //cm...
-        
-        
-        
+        ClienteMapper cm=sqlss.getMapper(ClienteMapper.class);
+
+        System.out.println("Clientes");
+        System.out.println(cm.consultarClientes());
+
+        System.out.println("Busqueda por documento Cliente");
+        System.out.println(cm.consultarCliente(311867));
+        /*
+        System.out.println("Agregar item rentado a un Cliente");
+        System.out.println("Se requieren ids y fechas");
+        //cm.agregarItemRentadoACliente(311867, 2, Date.valueOf("2022-01-16"), Date.valueOf("2022-01-16"));
+        */
+        ItemMapper im=sqlss.getMapper(ItemMapper.class);
+        System.out.println("Items");
+        System.out.println(im.consultarItems());
+
+        System.out.println("Consultar Item");
+        System.out.println(im.consultarItem(2));
+
         sqlss.commit();
         
         

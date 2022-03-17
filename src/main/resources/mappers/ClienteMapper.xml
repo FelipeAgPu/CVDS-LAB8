@@ -5,6 +5,37 @@
   
 <mapper namespace="edu.eci.cvds.sampleprj.dao.mybatis.mappers.ClienteMapper">
 
+    <select parameterType="map" id="consultarClientes" resultMap="ClienteResult">
+        SELECT
+        c.nombre AS cNombre,
+        c.documento AS cDocumento
 
+        FROM VI_CLIENTES AS c;
+    </select>
+
+    <select parameterType="map" id="consultarCliente" resultMap="ClienteResult">
+        SELECT
+        c.nombre AS cNombre,
+        c.documento AS cDocumento
+
+        FROM VI_CLIENTES AS c
+
+        WHERE c.documento = #{idCliente};
+    </select>
+
+    <insert id="agregarItemRentadoACliente" parameterType="map" >
+        INSERT INTO VI_ITEMRENTADO (CLIENTES_documento,ITEMS_id,fechainiciorenta,fechafinrenta)
+        VALUES(#{idCliente},#{idit},#{fInicio},#{fFin});
+    </insert>
+
+    <resultMap type ="Cliente" id="ClienteResult">
+        <id property="documento" column="cDocumento"/>
+        <result property="nombre" column="cNombre" />
+        <result property="telefono" column="cTelefono" />
+        <result property="direccion" column="cDireccion" />
+        <result property="email" column="cEmail" />
+        <result property="vetado" column="cVetado" />
+        <collection property="rentados" ofType="ItemRentado" resultMap="edu.eci.cvds.sampleprj.dao.mybatis.mappers.ItemRentadoMapper.ItemRentadoResult" columnPrefix="ir"/>
+    </resultMap>
           	
 </mapper>

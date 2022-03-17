@@ -5,7 +5,37 @@
   
 <mapper namespace="edu.eci.cvds.sampleprj.dao.mybatis.mappers.ItemMapper">
 
+    <select parameterType="map" id="consultarItems" resultMap="ItemResult">
+        SELECT
+        i.nombre AS iNombre
 
+        FROM VI_ITEMS AS i;
+    </select>
+
+    <select parameterType="map" id="consultarItem" resultMap="ItemResult">
+        SELECT
+        i.nombre AS iNombre
+
+        FROM VI_ITEMS AS i
+
+        WHERE i.id = #{idItem};
+    </select>
+
+    <insert id="insertarItem" parameterType="map">
+        INSERT INTO VI_ITEMS
+        VALUES( #{item.id},#{item.nombre},#{item.descripcion},#{item.fechaLanzamiento},#{item.tarifaxDia},#{item.formatoRenta},#{item.genero},#{item.tipo.id}) ;
+    </insert>
+
+    <resultMap type="Item" id="ItemResult">
+        <id property="id" column="iId"/>
+        <result property="nombre" column="iNombre"/>
+        <result property="descripcion" column="iDescripcion"/>
+        <result property="fechaLanzamiento" column="iFechaLanzamiento"/>
+        <result property="tarifaxDia" column="iTarifaxDia"/>
+        <result property="formatoRenta" column="iFormatoRenta"/>
+        <result property="genero" column="iGenero"/>
+        <association property="tipo" javaType="TipoItem"/>
+    </resultMap>
     
     
 </mapper>
