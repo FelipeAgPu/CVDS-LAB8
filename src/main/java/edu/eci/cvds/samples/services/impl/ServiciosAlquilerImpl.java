@@ -32,7 +32,7 @@ public class ServiciosAlquilerImpl implements ServiciosAlquiler {
     }
 
     @Override
-    public Cliente consultarCliente(int docu) throws ExcepcionServiciosAlquiler {
+    public Cliente consultarCliente(long docu) throws ExcepcionServiciosAlquiler {
         try {
             return clienteDAO.load(docu);
         }catch (PersistenceException ex) {

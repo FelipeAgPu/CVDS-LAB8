@@ -161,11 +161,4 @@ public class JDBCExample {
 
         return total;
     }
-
-
-    
-
-    
-    
-    
 }

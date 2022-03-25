@@ -13,7 +13,7 @@ public class MyBATISClienteDAO implements ClienteDAO {
 
 
     @Override
-    public Cliente load(int docu) throws PersistenceException {
+    public Cliente load(long docu) throws PersistenceException {
         try {
             return clienteMapper.consultarCliente(docu);
         }catch (PersistenceException ex){

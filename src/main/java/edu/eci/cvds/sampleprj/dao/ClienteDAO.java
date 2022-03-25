@@ -5,6 +5,6 @@ import org.apache.ibatis.exceptions.PersistenceException;
 
 public interface ClienteDAO {
 
-    public Cliente load(int id) throws PersistenceException;
+    public Cliente load(long id) throws PersistenceException;
 
 }
