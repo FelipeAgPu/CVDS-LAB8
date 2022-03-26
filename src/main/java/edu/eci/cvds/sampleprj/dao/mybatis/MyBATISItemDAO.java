@@ -7,6 +7,8 @@ import edu.eci.cvds.samples.entities.Item;
 import edu.eci.cvds.sampleprj.dao.mybatis.mappers.ItemMapper;
 import org.apache.ibatis.exceptions.PersistenceException;
 
+import java.util.List;
+
 public class MyBATISItemDAO implements ItemDAO{
 
     @Inject
@@ -33,6 +35,11 @@ public class MyBATISItemDAO implements ItemDAO{
         }
 
 
+    }
+
+    @Override
+    public List<Item> consultarDisponibles() throws PersistenceException {
+        return null;
     }
 
 }

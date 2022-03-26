@@ -28,6 +28,11 @@ import edu.eci.cvds.sampleprj.dao.mybatis.mappers.ItemMapper;
 import edu.eci.cvds.sampleprj.dao.mybatis.mappers.ItemRentadoMapper;
 import edu.eci.cvds.samples.entities.Item;
 import edu.eci.cvds.samples.entities.TipoItem;
+import edu.eci.cvds.samples.services.ExcepcionServiciosAlquiler;
+import edu.eci.cvds.samples.services.ServiciosAlquiler;
+import edu.eci.cvds.samples.services.ServiciosAlquilerFactory;
+import edu.eci.cvds.samples.services.impl.ServiciosAlquilerImpl;
+import edu.eci.cvds.samples.services.impl.ServiciosAlquilerItemsStub;
 import org.apache.ibatis.io.Resources;
 import org.apache.ibatis.session.SqlSession;
 import org.apache.ibatis.session.SqlSessionFactory;
@@ -64,36 +69,39 @@ public class MyBatisExample {
      * @param args
      * @throws SQLException 
      */
-    public static void main(String args[]) throws SQLException {
-        SqlSessionFactory sessionfact = getSqlSessionFactory();
+    public static void main(String args[]) throws SQLException, ExcepcionServiciosAlquiler {
+        System.out.println(ServiciosAlquilerFactory.getInstance().getServiciosAlquiler().consultarCliente(1026585664));
 
-        SqlSession sqlss = sessionfact.openSession();
+        /**
+            SqlSessionFactory sessionfact = getSqlSessionFactory();
 
-        
-        //Crear el mapper y usarlo: 
-        ClienteMapper cm=sqlss.getMapper(ClienteMapper.class);
+            SqlSession sqlss = sessionfact.openSession();
 
-        System.out.println("Clientes");
-        System.out.println(cm.consultarClientes());
 
-        System.out.println("Busqueda por documento Cliente");
-        System.out.println(cm.consultarCliente(311867));
-        /*
-        System.out.println("Agregar item rentado a un Cliente");
-        System.out.println("Se requieren ids y fechas");
-        //cm.agregarItemRentadoACliente(311867, 2, Date.valueOf("2022-01-16"), Date.valueOf("2022-01-16"));
+            //Crear el mapper y usarlo:
+            ClienteMapper cm=sqlss.getMapper(ClienteMapper.class);
+
+            System.out.println("Clientes");
+            System.out.println(cm.consultarClientes());
+
+            System.out.println("Busqueda por documento Cliente");
+            System.out.println(cm.consultarCliente(311867));
+            /*
+            System.out.println("Agregar item rentado a un Cliente");
+            System.out.println("Se requieren ids y fechas");
+            //cm.agregarItemRentadoACliente(311867, 2, Date.valueOf("2022-01-16"), Date.valueOf("2022-01-16"));
+            ItemMapper im=sqlss.getMapper(ItemMapper.class);
+            System.out.println("Items");
+            System.out.println(im.consultarItems());
+
+            System.out.println("Consultar Item");
+            System.out.println(im.consultarItem(2));
+
+            sqlss.commit();
+
+
+            sqlss.close();
         */
-        ItemMapper im=sqlss.getMapper(ItemMapper.class);
-        System.out.println("Items");
-        System.out.println(im.consultarItems());
-
-        System.out.println("Consultar Item");
-        System.out.println(im.consultarItem(2));
-
-        sqlss.commit();
-        
-        
-        sqlss.close();
 
         
         
