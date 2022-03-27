@@ -2,13 +2,10 @@
 <html xmlns="http://www.w3c.org/1999/xhtml"
       xmlns:h="http://xmlns.jcp.org/jsf/html"
       xmlns:p="http://primefaces.org/ui"
-      xmlns:ui="http://java.sun.com/jsf/facelets"
       xmlns:f="http://java.sun.com/jsf/core">
 
 <h:head>
     <title>Registro Cliente</title>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.10.1/jquery.min.js"></script>
-    <script src="//cdnjs.cloudflare.com/ajax/libs/list.js/1.5.0/list.min.js"></script>
     <style>
         body {
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
@@ -22,13 +19,11 @@
     </style>
 </h:head>
 <h:body>
-    <h:form id="formulario">
-
-        <p:dataTable id="singleDT" var="cliente" value="#{AlquilerItemsBean.consultarClientes()}"
-                     selectionMode="single" selection="#{AlquilerItemsBean.clienteSeleccionado}"
-                     paginator="true"
-                     paginatorTemplate="{PreviousPageLink} {CurrentPageReport} {NextPageLink}"
-                     rowKey="#{cliente.documento}"  rows="8">
+    <h:form id="form">
+        <p:dataTable var="cliente" value="#{AlquilerItemsBean.consultarClientes()}"
+                     paginator="true" paginatorTemplate="{FirstPageLink} {PreviousPageLink} {CurrentPageReport} {NextPageLink} {LastPageLink}"
+                     rows="10" selectionMode="single" id="doc" selection="#{AlquilerItemsBean.selectedClient}"
+                     rowKey="#{cliente.getDocumento()}">
             <f:facet name="header">
                 Clientes Tienda videos
             </f:facet>
@@ -73,10 +68,11 @@
             <p:outputLabel for="Email" value="Email: " />
             <p:inputText id="Email" type="String" binding="#{email}"/>
 
-            <div class="divButton">
-            </div>
-
         </h:panelGrid>
+
+        <div class="divButton">
+            <p:commandButton update="Client_Form" class="Button" actionListener="#{AlquilerItemsBean.registrarCliente(doc.value,name.value,tele.value,dir.value,mail.value)}" value="Registrar Cliente"/>
+        </div>
 
     </h:form>
 </h:body>
